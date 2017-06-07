@@ -22,6 +22,7 @@ class ListNode{
 public class LinkedList {
 	private ListNode head=null;
 	public int length =0;
+	
 	public void insertAtBeg(int x){
 		ListNode temp =new ListNode(x);
 		if(head==null){
@@ -32,6 +33,16 @@ public class LinkedList {
 		
 		}
 		length++;
+	}
+	
+	public void insertAtEnd(int x){
+		ListNode temp=new ListNode(x);
+		ListNode temp2=head;
+		while(temp2.getnext()!=null){
+			temp2=temp2.getnext();
+		}
+		temp2.setnext(temp);
+		
 	}
 	
 	public void insert(int position,int data){
@@ -61,7 +72,28 @@ public class LinkedList {
 		
 	}
 	
-	
+	public int removeAt(int position){
+		ListNode temp=head,temp2=null;
+		if(position<1){
+			position=1;
+		}
+		if(position>length){
+			position=length;
+		}
+		if(position==1){
+			temp2=head;
+			head=head.getnext();
+		}else{
+			int i=1;
+			while(i<position-1){
+				temp=temp.getnext();
+				i++;
+			}
+			temp2=temp.getnext();
+			temp.setnext(temp.getnext().getnext());
+		}
+		return temp2.getdata();
+	}
 	
 	
 	public void printList(){
@@ -71,6 +103,7 @@ public class LinkedList {
 			System.out.println(temp.getdata()+" ");
 			temp=temp.getnext();
 		}
+		System.out.println();
 	}
 
 	public static void main(String[] args) {
@@ -84,6 +117,8 @@ public class LinkedList {
 		l.insert(0, 9);
 		l.printList();
 		l.insert(3, 8);
+		l.insertAtEnd(10);
+		l.removeAt(4);
 		l.printList();
 
 	}
